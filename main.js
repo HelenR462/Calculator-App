@@ -1,53 +1,88 @@
-const display = document.querySelector(".display-screen");
-const input = document.querySelector("#text").value;
-const clrBtn = document
-  .querySelector("#clear")
-  .addEventListener("click", (e) => clearNum(e));
+const input = document.querySelector("#result");
 
-function clearNum(e) {
-  e.preventDefault();
-  text.value = "";
-  focus();
-}
+const clrBtn = document
+  .querySelector("#clear");
+ clrBtn.addEventListener("click", e =>{
+ input.value = '';
+ 
+ alert("clear")
+});
+
 
 // NUMBER INPUT BUTTON
-
-const numBtn = document.querySelectorAll(".numbers");
-const operatorBtn = document.querySelectorAll(".operators");
-const decimal = document.querySelector(".decimal ");
-const equality = document.querySelector(".equality");
-
-class calculator {
-  constructor(firstNum, secondNum) {
-    this.firstNum = firstNum;
-    this.operator = operator;
-    this.secondNum = secondNum;
-    this.equality = equality;
-    this.displayValue = "";
-    {
-    }
+const calculator = {
+  firstNum:'',
+  secondNum:'',
+  result: null,
+  operator:'',
+  calculate : function(){
+    return this.firstNum.toString + this.operator.toString + this.secondNum.toString + this.result;
   }
-}
-numBtn.forEach((button) => {
-  document.addEventListener("click", () => {
-    calculator.append(button.value);
-    calculator.updateDisplay();
+  }
+
+const numBtn = document.querySelectorAll(".number");
+
+numBtn.forEach(button => {button.addEventListener("click", e => {
+   e.target = calculator.calculate;
+  input.append(numBtn);
+
+ alert("numbers")
+  })
+})
+
+ 
+const operatorBtn = document.querySelectorAll(".operator");
+
+operatorBtn.forEach((button) => {
+       button.addEventListener("click", e=>{
+        e.target = button.value;
+        
+        alert("operator")
+       });
+
+      switch(calculator.calculate){
+            case"addition":
+                 function addition(){
+                   if(this.firstNum + this.secondNum == true);
+        }
+              break;
+          
+            case "subtraction":
+                   function subtraction(){
+                   if(this.firstNum - this.secondNum == true);
+              }
+              break;
+          
+            case "multiplication":
+                 function multiplication(){
+                if(this.firstNum * this.secondNum == true);
+           }
+              break;
+          
+            case "division":
+              function division(){
+                if(this.firstNum / this.secondNum == true);
+           }
+              break;
+          
+              default:
+               
+          }
+       });
+      
+      
+const decimal = document.querySelector(".decimal ");
+decimal.addEventListener("click", (e) => {
+  e.target = decimal.value;
+  // button.value = ".";
+
+  alert("decimal");
   });
+
+const equality = document.querySelector(".equality");
+equality.addEventListener("click", (e) => {
+  e.target = equality.value;
+
+  alert("equality")
 });
-switch ((firstNum, secondNum)) {
-  case "+":
-    e.target(firstNum + secondNum + equality);
-    break;
 
-  case "-":
-    e.target(firstNum - secondNum + equality);
-    break;
-
-  case "*":
-    e.target(firstNum * secondNum + equality);
-    break;
-
-  case "/":
-    e.target(firstNum / secondNum + equality);
-    break;
-}

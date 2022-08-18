@@ -59,7 +59,7 @@ button#clear:hover{
     cursor: pointer;
 }
 
-#text{
+#result{
    background-color:#434343;
    border:1px solid rgb(178, 177, 177);
    border-top-left-radius: 5px;
@@ -75,7 +75,7 @@ button#clear:hover{
 
 }
 
-.numbers,.decimal,.equality,.operators{
+.number,.decimal,.equality,.operator{
    display:inline-block ;
    font-size: 40px;
    width:50px ;
@@ -92,7 +92,7 @@ button#clear:hover{
 }
 
 
-.numbers:hover,.decimal:hover,.equality:hover,.operators:hover{
+.number:hover,.decimal:hover,.equality:hover,.operator:hover{
     background-color:gray;
     color: white;
    
