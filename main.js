@@ -1,88 +1,90 @@
+const displayScreen = document.querySelector(".display-screen");
 const input = document.querySelector("#result");
-
-const clrBtn = document
-  .querySelector("#clear");
- clrBtn.addEventListener("click", e =>{
- input.value = '';
- 
- alert("clear")
-});
-
-
-// NUMBER INPUT BUTTON
-const calculator = {
-  firstNum:'',
-  secondNum:'',
-  result: null,
-  operator:'',
-  calculate : function(){
-    return this.firstNum.toString + this.operator.toString + this.secondNum.toString + this.result;
-  }
-  }
-
+const firstNum = document.querySelector(".firstNum");
+const secondNum = document.querySelector(".secondNum");
 const numBtn = document.querySelectorAll(".number");
+const operator = document.querySelectorAll(".operator");
+const clrBtn = document.querySelector("#clear");
+        clrBtn.addEventListener("click", (e) => {
+             input.value = "";
+ });
+ 
+// ~~~~~~~~~~~NUMBERS~~~~~~~~~~~~~~~~~
 
-numBtn.forEach(button => {button.addEventListener("click", e => {
-   e.target = calculator.calculate;
-  input.append(numBtn);
+ numBtn.forEach((button) => {
+ button.addEventListener("click", (e) => {
+ 
+   input.value += button.textContent;
+    
+ const result = document.getElementById("equality")
+ .addEventListener("click", compute);
 
- alert("numbers")
+function compute(firstNum, secondNum){
+  switch (operator){
+    case "+":
+      result = firstNum + secondNum;
+          break;
+        
+   case "-":
+    result = firstNum - secondNum;
+        break;
+  
+    case "*":
+    result = firstNum * secondNum;
+         break;
+  
+    case "/":
+      result = firstNum / secondNum;
+         break;
+  
+    default:
+      input.value = result.textContent  ;
+  }
+}
+   
   })
+      })
+    
+// ~~~~~~~~~~~)OPERATORS~~~~~~~~~~~~~~
+operator.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    input.value += button.textContent;
+    if(e.target == numBtn ){
+operator.textContent.value = true;
+}else {
+  false
+}
+  });
+    
+    
+
+//~~~~~~~~~~~ DECIMAL~~~~~~~~~
+  const decimal = document.querySelector(".decimal ");
+decimal.addEventListener("click", (e) => {
+
+
+  input.value += decimal.textContent;
+
+ if( e.target == numBtn){
+  append(numBtn.value) = true;
+  }else{
+  false;
+}
+})
 })
 
+
+// /~~~~~~~~~~~~~~~EQUALITY~~~~~~~~~~~~~~
+
+
+const equal = document.querySelector(".result")
+.addEventListener("click", (e) => {
+  
+  
+     input.value += result.textContent;
+})
+    
  
-const operatorBtn = document.querySelectorAll(".operator");
+    
 
-operatorBtn.forEach((button) => {
-       button.addEventListener("click", e=>{
-        e.target = button.value;
-        
-        alert("operator")
-       });
-
-      switch(calculator.calculate){
-            case"addition":
-                 function addition(){
-                   if(this.firstNum + this.secondNum == true);
-        }
-              break;
-          
-            case "subtraction":
-                   function subtraction(){
-                   if(this.firstNum - this.secondNum == true);
-              }
-              break;
-          
-            case "multiplication":
-                 function multiplication(){
-                if(this.firstNum * this.secondNum == true);
-           }
-              break;
-          
-            case "division":
-              function division(){
-                if(this.firstNum / this.secondNum == true);
-           }
-              break;
-          
-              default:
-               
-          }
-       });
-      
-      
-const decimal = document.querySelector(".decimal ");
-decimal.addEventListener("click", (e) => {
-  e.target = decimal.value;
-  // button.value = ".";
-
-  alert("decimal");
-  });
-
-const equality = document.querySelector(".equality");
-equality.addEventListener("click", (e) => {
-  e.target = equality.value;
-
-  alert("equality")
-});
-
+  

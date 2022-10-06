@@ -75,7 +75,7 @@ button#clear:hover{
 
 }
 
-.number,.decimal,.equality,.operator{
+.number,.decimal,.result,.operator{
    display:inline-block ;
    font-size: 40px;
    width:50px ;
