@@ -1,90 +1,120 @@
 const displayScreen = document.querySelector(".display-screen");
 const input = document.querySelector("#result");
-const firstNum = document.querySelector(".firstNum");
-const secondNum = document.querySelector(".secondNum");
 const numBtn = document.querySelectorAll(".number");
-const operator = document.querySelectorAll(".operator");
+const operatorBtn = document.querySelectorAll(".operator");
+
 const clrBtn = document.querySelector("#clear");
-        clrBtn.addEventListener("click", (e) => {
-             input.value = "";
- });
- 
-// ~~~~~~~~~~~NUMBERS~~~~~~~~~~~~~~~~~
+clrBtn.addEventListener("click", (e) => {
+  input.value = "";
+});
 
- numBtn.forEach((button) => {
- button.addEventListener("click", (e) => {
- 
-   input.value += button.textContent;
-    
- const result = document.getElementById("equality")
- .addEventListener("click", compute);
+//  STEP 1 Press 1
+// EXPECTED= 1 to show on screen
+// ACTUAL= IT WORKS!
 
-function compute(firstNum, secondNum){
-  switch (operator){
-    case "+":
-      result = firstNum + secondNum;
-          break;
-        
-   case "-":
-    result = firstNum - secondNum;
-        break;
-  
-    case "*":
-    result = firstNum * secondNum;
-         break;
-  
-    case "/":
-      result = firstNum / secondNum;
-         break;
-  
-    default:
-      input.value = result.textContent  ;
-  }
-}
-   
-  })
-      })
-    
-// ~~~~~~~~~~~)OPERATORS~~~~~~~~~~~~~~
-operator.forEach((button) => {
+// STEP 2 Press +
+// EXPTECED= 1+ to show on screen
+// ACTUAL= IT WORKS
+
+// STEP 3 Press 2
+// EXPECTED= 2 to show on screen
+// ACTUAL= IT WORKS!
+
+// STEP 4 Press =
+// EXPECTED = result to show on screen
+// ACTUAL=  Displays empty screen
+
+// STEP 5 Press operator 
+// EXPECTED = not to repeat
+// ACTUAL= except for '+' the rest DO NOT WORK
+
+
+let firstOperand = null; //working
+let operator = null; //working
+let secondOperand = null;  //working
+let result = null;
+
+
+ 
+numBtn.forEach((button) => {
   button.addEventListener("click", (e) => {
-    input.value += button.textContent;
-    if(e.target == numBtn ){
-operator.textContent.value = true;
-}else {
-  false
-}
-  });
-    
-    
-
-//~~~~~~~~~~~ DECIMAL~~~~~~~~~
-  const decimal = document.querySelector(".decimal ");
-decimal.addEventListener("click", (e) => {
-
-
-  input.value += decimal.textContent;
-
- if( e.target == numBtn){
-  append(numBtn.value) = true;
-  }else{
-  false;
-}
-})
-})
-
-
-// /~~~~~~~~~~~~~~~EQUALITY~~~~~~~~~~~~~~
-
-
-const equal = document.querySelector(".result")
-.addEventListener("click", (e) => {
+   
+    input.value +=button.textContent ;
   
-  
-     input.value += result.textContent;
-})
-    
+    if(input.value === '.'&& this.secondOperand.includes('.')){
+       input.value =''
+    }
+
+
+
+});
+});
+
+
+
+operatorBtn.forEach((button) => {
+  button.addEventListener("click", (e) => {
  
-    
-
+     input.value += button.textContent;
   
+     if(input.value === '+'||
+        input.value === '-' ||input.value == '*' ||input.value == '/'
+        && this.operator.includes(
+          ['+','-','*','/']) 
+          ){
+      input.value = ''
+   }
+  
+ 
+
+});
+  
+const decimal = document.getElementById("decimal");
+decimal.addEventListener("click", (e) => {
+ 
+  input.value = decimal.textContent;
+     
+     
+});
+
+const equalsBtn = document.getElementById("compute");
+equalsBtn.addEventListener("click", compute);
+  
+function compute
+    (firstOperand, operator, secondOperand) {
+  firstOperand = parseInt(this.firstOperand);
+      secondOperand = parseInt(this.secondOperand);
+  if (isNaN(secondOperand) || isNaN(firstOperand)){
+   input.value = ''
+      switch (this.operator) {
+
+        case "+":
+          input.value = this.firstOperand + this.secondOperand;
+          break;
+
+        case "-":
+          input.value = firstOperand - secondOperand;
+          break;
+
+        case "*":
+          input.value = firstOperand * secondOperand;
+          break;
+
+        case "÷":
+          input.value = firstOperand / secondOperand;
+          break;
+
+        default:
+          this.firstOperand = this.secondOperand;
+          this.operator = operator;
+          this.secondOperand = '';
+      }
+    }
+  }
+})
+
+
+
+
+ 
+
