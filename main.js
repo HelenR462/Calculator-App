@@ -61,8 +61,7 @@ numBtn.forEach((button) => {
   operatorBtn.forEach((button) => {
     button.addEventListener("click", () => {
       //code this =>  set the operator variable to operator symbol
-      // const concat= "";
-      if (operator == null) {
+       if (operator == null) {
         operator = button.textContent;
         input.value += operator;
       }
@@ -83,7 +82,8 @@ function compute() {
   console.log("secondOperand: ", secondOperand);
   console.log("operator: ", operator);
 
-  // let operator = "operator";
+  //ISSUE #2
+  //  except for '+' operator none work and this is my attempt to loop trough each operator
   for (let i = 0; i < operator.length; i++) {
     operator.textContent += operator[i] + "<br>";
 
@@ -94,17 +94,14 @@ function compute() {
 
       case "-":
         input.value = parseInt(firstOperand) - parseInt(secondOperand);
-
         break;
 
       case "*":
-        input.value = firstOperand * secondOperand;
-        // input.value = parseInt(firstOperand) * parseInt(secondOperand);
+        input.value = parseInt(firstOperand) * parseInt(secondOperand);
         break;
 
       case "/":
-        input.value = firstOperand / secondOperand;
-        // input.value = parseInt(firstOperand) / parseInt(secondOperand);
+       input.value = parseInt(firstOperand) / parseInt(secondOperand);
         break;
 
       default:
