@@ -8,21 +8,21 @@ clrBtn.addEventListener("click", () => {
   input.value = "";
 });
 
-// STEP 1 Press 11
-// EXPECTED = 11  to show on screen
+// STEP 1 Press 3
+// EXPECTED = 3  to show on screen
 // ACTUAL= IT WORKS
 
-// STEP 2 Press +
-// EXPECTED = 11+ to show on screen
+//STEP 2 Press -
+// EXPECTED = -  to show on screen
 // ACTUAL= IT WORKS
 
-// STEP 3 Press 22
-// EXPECTED = 11 + 22 to show on screen
+// STEP 3 Press 2
+// EXPECTED = 2 to show on screen
 // ACTUAL= IT WORKS
 
 // STEP 4 Press =
-// EXPECTED = 33 to show on screen
-// ACTUAL= 13
+// EXPECTED = 1 to show on screen
+// ACTUAL= 3-2
 
 let firstOperand = null; //working
 let operator = null; //working
@@ -32,40 +32,35 @@ let result = null;
 numBtn.forEach((button) => {
   button.addEventListener("click", (e) => {
     if (operator == null) {
-      firstOperand = button.textContent;
-      input.value += firstOperand;
+      if (firstOperand !== null) {
+        firstOperand += button.textContent;
+      } else {
+        firstOperand = button.textContent;
+      }
+    } else if (secondOperand !== null) {
+      secondOperand += button.textContent;
     } else {
       secondOperand = button.textContent;
-      input.value += secondOperand;
     }
-    // if first operand is null
-    if (firstOperand == null) {
-      // set the firstoperand equal button text content
-      firstOperand = button.textContent;
-      secondOperand = input.value;
-      // append the button text content to first operand
-    } else {
-      firstOperand = input.value;
-      secondOperand = button.textContent;
-    }
-
-    if (secondOperand == null) {
-      secondOperand = button.textContent;
-    }
+    input.value += button.textContent;
 
     console.log("firstOperand: ", firstOperand);
     console.log("secondOperand: ", secondOperand);
     console.log("operator: ", operator);
   });
+});
 
-  operatorBtn.forEach((button) => {
-    button.addEventListener("click", () => {
-      //code this =>  set the operator variable to operator symbol
-       if (operator == null) {
-        operator = button.textContent;
-        input.value += operator;
-      }
-    });
+operatorBtn.forEach((button) => {
+  button.addEventListener("click", () => {
+    console.log("operator button");
+    
+    if (operator !== null) {
+      secondOperand = button.value;
+    } else {
+      operator = button.value;
+      input.value += button.value;
+    
+    }
   });
 });
 
@@ -78,36 +73,30 @@ const equalsBtn = document.getElementById("compute");
 equalsBtn.addEventListener("click", compute);
 
 function compute() {
+ 
+ 
   console.log("firstOperand: ", firstOperand);
   console.log("secondOperand: ", secondOperand);
   console.log("operator: ", operator);
 
-  //ISSUE #2
-  //  except for '+' operator none work and this is my attempt to loop trough each operator
-  for (let i = 0; i < operator.length; i++) {
-    operator.textContent += operator[i] + "<br>";
+  switch (operator) {
+    case "+":
+      input.value = parseInt(firstOperand) + parseInt(secondOperand);
+      break;
 
-    switch (operator) {
-      case "+":
-        input.value = parseInt(firstOperand) + parseInt(secondOperand);
-        break;
+    case "-":
+      input.value = parseInt(firstOperand) - parseInt(secondOperand);
+      break;
 
-      case "-":
-        input.value = parseInt(firstOperand) - parseInt(secondOperand);
-        break;
+    case "*":
+      input.value = parseInt(firstOperand) * parseInt(secondOperand);
+      break;
 
-      case "*":
-        input.value = parseInt(firstOperand) * parseInt(secondOperand);
-        break;
+    case "/":
+      input.value = (parseFloat(firstOperand) / parseFloat(secondOperand)).toFixed(4);
+      break;
 
-      case "/":
-       input.value = parseInt(firstOperand) / parseInt(secondOperand);
-        break;
-
-      default:
-        firstOperand = secondOperand;
-        operator = operator;
-        secondOperand = "";
-    }
+    default:
+   
   }
 }
