@@ -8,21 +8,37 @@ clrBtn.addEventListener("click", () => {
   input.value = "";
 });
 
-// STEP 1 Press 3
-// EXPECTED = 3  to show on screen
+// STEP 1 Press 1
+// EXPECTED = 1  to show on screen
 // ACTUAL= IT WORKS
 
-//STEP 2 Press -
-// EXPECTED = -  to show on screen
+//STEP 2 Press +
+// EXPECTED = 1+  to show on screen
 // ACTUAL= IT WORKS
 
-// STEP 3 Press 2
-// EXPECTED = 2 to show on screen
+// STEP 3 Press 1
+// EXPECTED = 1+1 to show on screen
 // ACTUAL= IT WORKS
 
-// STEP 4 Press =
-// EXPECTED = 1 to show on screen
-// ACTUAL= 3-2
+// STEP 4 Press +
+// EXPECTED = 1+1+ to show on screen
+// ACTUAL= IT WORKS
+
+// STEP 5 Press 1
+// EXPECTED = 1+1+1 to show on screen
+// ACTUAL= IT WORKS
+
+//STEP 6 Press +
+// EXPECTED = 1+1+1+  to show on screen
+// ACTUAL= IT WORKS
+
+// STEP 7 Press 1
+// EXPECTED = 1+1+1+1 to show on screen
+// ACTUAL= IT WORKS
+
+// STEP 8 Press =
+// EXPECTED = 4  to show on screen
+// ACTUAL= 2
 
 let firstOperand = null; //working
 let operator = null; //working
@@ -53,14 +69,14 @@ numBtn.forEach((button) => {
 operatorBtn.forEach((button) => {
   button.addEventListener("click", () => {
     console.log("operator button");
-    
+
     if (operator !== null) {
-      secondOperand = button.value;
+      secondOperand += button.textContent;
     } else {
       operator = button.value;
-      input.value += button.value;
-    
     }
+
+    input.value += button.textContent;
   });
 });
 
@@ -73,8 +89,6 @@ const equalsBtn = document.getElementById("compute");
 equalsBtn.addEventListener("click", compute);
 
 function compute() {
- 
- 
   console.log("firstOperand: ", firstOperand);
   console.log("secondOperand: ", secondOperand);
   console.log("operator: ", operator);
@@ -93,10 +107,11 @@ function compute() {
       break;
 
     case "/":
-      input.value = (parseFloat(firstOperand) / parseFloat(secondOperand)).toFixed(4);
+      input.value = (
+        parseFloat(firstOperand) / parseFloat(secondOperand)
+      ).toFixed(4);
       break;
 
     default:
-   
   }
 }
