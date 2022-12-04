@@ -71,14 +71,23 @@ operatorBtn.forEach((button) => {
     console.log("operator button");
 
     if (operator !== null) {
-      secondOperand += button.textContent;
+      // append firstOperand value to secondOperand, update 1st operand to null,update operator
+
+      secondOperand = parseInt(firstOperand) + parseInt(secondOperand);
+      firstOperand = null;
+      operator = compute(operator);
     } else {
       operator = button.value;
     }
 
-    input.value += button.textContent;
+    input.value += button.value;
+
+    console.log("firstOperand: ", firstOperand);
+    console.log("secondOperand: ", secondOperand);
+    console.log("operator: ", operator);
   });
 });
+//});
 
 const decimal = document.getElementById("decimal");
 decimal.addEventListener("click", () => {
@@ -89,9 +98,9 @@ const equalsBtn = document.getElementById("compute");
 equalsBtn.addEventListener("click", compute);
 
 function compute() {
-  console.log("firstOperand: ", firstOperand);
-  console.log("secondOperand: ", secondOperand);
-  console.log("operator: ", operator);
+  // console.log("firstOperand: ", firstOperand);
+  // console.log("secondOperand: ", secondOperand);
+  // console.log("operator: ", operator);
 
   switch (operator) {
     case "+":
@@ -109,7 +118,7 @@ function compute() {
     case "/":
       input.value = (
         parseFloat(firstOperand) / parseFloat(secondOperand)
-      ).toFixed(4);
+      ).toFixed();
       break;
 
     default:
