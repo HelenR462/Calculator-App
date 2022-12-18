@@ -8,38 +8,6 @@ clrBtn.addEventListener("click", () => {
   input.value = "";
 });
 
-// STEP 1 Press 1
-// EXPECTED = 1  to show on screen
-// ACTUAL= IT WORKS
-
-//STEP 2 Press +
-// EXPECTED = 1+  to show on screen
-// ACTUAL= IT WORKS
-
-// STEP 3 Press 1
-// EXPECTED = 1+1 to show on screen
-// ACTUAL= IT WORKS
-
-// STEP 4 Press +
-// EXPECTED = 1+1+ to show on screen
-// ACTUAL= IT WORKS
-
-// STEP 5 Press 1
-// EXPECTED = 1+1+1 to show on screen
-// ACTUAL= IT WORKS
-
-//STEP 6 Press +
-// EXPECTED = 1+1+1+  to show on screen
-// ACTUAL= IT WORKS
-
-// STEP 7 Press 1
-// EXPECTED = 1+1+1+1 to show on screen
-// ACTUAL= IT WORKS
-
-// STEP 8 Press =
-// EXPECTED = 4  to show on screen
-// ACTUAL= 2
-
 let firstOperand = null; //working
 let operator = null; //working
 let secondOperand = null; //working
@@ -54,7 +22,7 @@ function detectCalculatorPosition() {
     return "Operator";
   if (firstOperand !== null && secondOperand !== null && operator !== null)
     return "SecondOperand";
-  //  return "Error";
+  return "Error";
 }
 
 numBtn.forEach((button) => {
@@ -62,15 +30,17 @@ numBtn.forEach((button) => {
     const calculatorPosition = detectCalculatorPosition();
     switch (calculatorPosition) {
       case "Fresh":
-       firstOperand = button.textContent;
+        firstOperand = button.textContent;
         break;
 
       case "FirstOperand":
-      firstOperand += button.textContent;
+        firstOperand += button.textContent;
+
         break;
 
       case "Operator":
-      firstOperand = button.textContent;
+        firstOperand = button.textContent;
+
         break;
 
       case "SecondOperand":
@@ -81,7 +51,7 @@ numBtn.forEach((button) => {
         break;
     }
 
-   // input.value += button.value;
+    input.value += button.textContent;
 
     console.log("firstOperand: ", firstOperand);
     console.log("secondOperand: ", secondOperand);
@@ -95,21 +65,22 @@ operatorBtn.forEach((button) => {
     console.log("operator button");
 
     const calculatorPosition = detectCalculatorPosition();
+
     switch (calculatorPosition) {
       case "Fresh":
         //Do nothing
-
         break;
 
       case "FirstOperand":
-         secondOperand =  firstOperand; 
+        secondOperand = firstOperand;
         firstOperand = null;
         operator = button.value;
+
         break;
 
       case "Operator":
         firstOperand = null;
-        operator += button.value;
+        operator = button.value;
 
         break;
 
@@ -117,6 +88,7 @@ operatorBtn.forEach((button) => {
         result = compute();
         secondOperand = result;
         firstOperand = null;
+        operator = button.value;
 
         break;
 
@@ -124,11 +96,11 @@ operatorBtn.forEach((button) => {
         break;
     }
 
-    //input.value += button.value;
+    input.value += button.textContent;
 
-    console.log("firstOperand: ", firstOperand);
-    console.log("secondOperand: ", secondOperand);
-    console.log("operator: ", operator);
+    // console.log("firstOperand: ", firstOperand);
+    // console.log("secondOperand: ", secondOperand);
+    // console.log("operator: ", operator);
   });
 });
 
@@ -138,12 +110,19 @@ decimal.addEventListener("click", () => {
 });
 
 const equalsBtn = document.getElementById("compute");
-equalsBtn.addEventListener("click", compute);
+equalsBtn.addEventListener("click", function () {
+  const returnvalue = compute();
+
+  input.value = returnvalue;
+});
 
 function compute() {
-  console.log("firstOperand: ", firstOperand);
-  console.log("secondOperand: ", secondOperand);
-  console.log("operator: ", operator);
+  const position = detectCalculatorPosition();
+
+  // console.log("firstOperand: ", firstOperand);
+  // console.log("secondOperand: ", secondOperand);
+  // console.log("operator: ", operator);
+  //let operator = button.value;
 
   switch (operator) {
     case "+":
@@ -159,10 +138,13 @@ function compute() {
       break;
 
     case "/":
-      return toFixed(4).parseInt(secondOperand) / parseInt(firstOperand);
+      if (firstOperand % secondOperand) {
+        return (parseFloat(secondOperand) / parseFloat(firstOperand)).toFixed(4);
+      }
+
       break;
 
     default:
-    
+      break;
   }
 }
