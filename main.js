@@ -2,16 +2,119 @@ const displayScreen = document.querySelector(".display-screen");
 const input = document.querySelector("#result");
 const numBtn = document.querySelectorAll(".number");
 const operatorBtn = document.querySelectorAll(".operator");
-
 const clrBtn = document.querySelector("#clear");
+const equalsBtn = document.getElementById("compute");
+const decimal = document.getElementById("decimal");
+
+let firstOperand = null;
+let operator = null;
+let secondOperand = null;
+let result = null;
+
+numBtn.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    const calculatorPosition = detectCalculatorPosition();
+    numberLogic(calculatorPosition, button.textContent);
+    updateDisplay();
+  });
+});
+
+operatorBtn.forEach((button) => {
+  button.addEventListener("click", () => {
+    const calculatorPosition = detectCalculatorPosition();
+    operatorLogic(calculatorPosition, button.value);
+    updateDisplay();
+  });
+});
+
+equalsBtn.addEventListener("click", function () {
+  if (firstOperand === null) return;
+  result = compute();
+  if (isFinite(result)) {
+    secondOperand = result;
+    firstOperand = null;
+    operator = "";
+  }
+  updateDisplay();
+});
+
+decimal.addEventListener("click", () => {
+  const calculatorPosition = detectCalculatorPosition();
+  decimalLogic(calculatorPosition);
+  updateDisplay();
+});
+
 clrBtn.addEventListener("click", () => {
+  firstOperand = null;
+  operator = null;
+  secondOperand = null;
+  result = null;
   input.value = "";
 });
 
-let firstOperand = null; //working
-let operator = null; //working
-let secondOperand = null; //working
-let result = null;
+function numberLogic(calculatorPosition, value) {
+  switch (calculatorPosition) {
+    case "Fresh":
+      firstOperand = value;
+      break;
+    case "FirstOperand":
+      firstOperand += value;
+      break;
+    case "Operator":
+      firstOperand = value;
+      break;
+    case "SecondOperand":
+      firstOperand += value;
+      break;
+    default:
+      break;
+  }
+}
+
+function operatorLogic(calculatorPosition, value) {
+  switch (calculatorPosition) {
+    case "Fresh":
+      break;
+    case "FirstOperand":
+      secondOperand = firstOperand;
+      firstOperand = null;
+      operator = value;
+      break;
+    case "Operator":
+      firstOperand = null;
+      operator = value;
+      break;
+    case "SecondOperand":
+      result = compute();
+      if (isFinite(result)) {
+        secondOperand = result;
+        firstOperand = null;
+        operator = value;
+      }
+      break;
+    default:
+      break;
+  }
+}
+
+function decimalLogic(calculatorPosition) {
+  switch (calculatorPosition) {
+    case "Fresh":
+      firstOperand = ".";
+      break;
+    case "FirstOperand":
+      firstOperand += ".";
+      break;
+    case "Operator":
+      firstOperand += ".";
+      break;
+    case "SecondOperand":
+      firstOperand += ".";
+      break;
+    default:
+      break;
+  }
+}
 
 function detectCalculatorPosition() {
   if (firstOperand === null && secondOperand === null && operator === null)
@@ -25,125 +128,29 @@ function detectCalculatorPosition() {
   return "Error";
 }
 
-numBtn.forEach((button) => {
-  button.addEventListener("click", (e) => {
-    const calculatorPosition = detectCalculatorPosition();
-    switch (calculatorPosition) {
-      case "Fresh":
-        firstOperand = button.textContent;
-        break;
-
-      case "FirstOperand":
-        firstOperand += button.textContent;
-
-        break;
-
-      case "Operator":
-        firstOperand = button.textContent;
-
-        break;
-
-      case "SecondOperand":
-        firstOperand += button.textContent;
-        break;
-
-      default:
-        break;
-    }
-
-    input.value += button.textContent;
-
-    console.log("firstOperand: ", firstOperand);
-    console.log("secondOperand: ", secondOperand);
-    console.log("operator: ", operator);
-    console.log(calculatorPosition);
-  });
-});
-
-operatorBtn.forEach((button) => {
-  button.addEventListener("click", () => {
-    console.log("operator button");
-
-    const calculatorPosition = detectCalculatorPosition();
-
-    switch (calculatorPosition) {
-      case "Fresh":
-        //Do nothing
-        break;
-
-      case "FirstOperand":
-        secondOperand = firstOperand;
-        firstOperand = null;
-        operator = button.value;
-
-        break;
-
-      case "Operator":
-        firstOperand = null;
-        operator = button.value;
-
-        break;
-
-      case "SecondOperand":
-        result = compute();
-        secondOperand = result;
-        firstOperand = null;
-        operator = button.value;
-
-        break;
-
-      default:
-        break;
-    }
-
-    input.value += button.textContent;
-
-    // console.log("firstOperand: ", firstOperand);
-    // console.log("secondOperand: ", secondOperand);
-    // console.log("operator: ", operator);
-  });
-});
-
-const decimal = document.getElementById("decimal");
-decimal.addEventListener("click", () => {
-  input.value = decimal.value;
-});
-
-const equalsBtn = document.getElementById("compute");
-equalsBtn.addEventListener("click", function () {
-  const returnvalue = compute();
-
-  input.value = returnvalue;
-});
+function updateDisplay() {
+  let displayText = "";
+  displayText += secondOperand === null ? "" : Number(secondOperand);
+  displayText += operator === null ? "" : operator;
+  displayText += firstOperand === null ? "" : Number(firstOperand);
+  input.value = displayText;
+}
 
 function compute() {
-  const position = detectCalculatorPosition();
-
-  // console.log("firstOperand: ", firstOperand);
-  // console.log("secondOperand: ", secondOperand);
-  // console.log("operator: ", operator);
-  //let operator = button.value;
-
   switch (operator) {
     case "+":
-      return parseInt(firstOperand) + parseInt(secondOperand);
+      return Number(secondOperand) + Number(firstOperand);
       break;
-
     case "-":
-      return parseInt(secondOperand) - parseInt(firstOperand);
+      return Number(secondOperand) - Number(firstOperand);
       break;
-
     case "*":
-      return parseInt(firstOperand) * parseInt(secondOperand);
+      return Number(secondOperand) * Number(firstOperand);
       break;
-
     case "/":
-      if (firstOperand % secondOperand) {
-        return (parseFloat(secondOperand) / parseFloat(firstOperand)).toFixed(4);
-      }
-
+      if (Number(secondOperand) === 0) return;
+      return Number(secondOperand) / Number(firstOperand);
       break;
-
     default:
       break;
   }
