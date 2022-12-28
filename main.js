@@ -1,4 +1,4 @@
-const displayScreen = document.querySelector(".display-screen");
+const displayScreen = document.querySelector("display-screen");
 const input = document.querySelector("#result");
 const numBtn = document.querySelectorAll(".number");
 const operatorBtn = document.querySelectorAll(".operator");
@@ -31,7 +31,7 @@ equalsBtn.addEventListener("click", function () {
   if (firstOperand === null) return;
   result = compute();
   if (isFinite(result)) {
-    secondOperand = result;
+    secondOperand = result.toFixed(4);
     firstOperand = null;
     operator = "";
   }
