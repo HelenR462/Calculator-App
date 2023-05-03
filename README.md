@@ -11,7 +11,7 @@ Try it [here](https://HelenR462.github.io/Calculator-App/)
 
 <br>
 
-<img src="screenshot.png">
+<img src="image/screenshot.png">
 
 ## Summary
 
