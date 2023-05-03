@@ -7,7 +7,7 @@ _This is a simple calculator with a running total and memory options_
 
 <br>
 
-Try it [here](https://HelenR462.github.io/calculator/)
+Try it [here](https://HelenR462.github.io/Calculator-App/)
 
 <br>
 
