@@ -24,5 +24,4 @@ I'm really happy with how this turned out from both a visual user design to the 
 
 ## Author
 
--   **Helen M Naizghi-Redae**  - _Full-Stack Software Developer_ - [Website](https://helenmnaizghi-redae.com
-(https://www.linkedin.com/in/helenr)
+-   **Helen M Naizghi-Redae** - _Full-Stack Software Developer_ - [Website](https://helenmnaizghi-redae.com) | [LinkedIn](https://www.linkedin.com/in/helen-r-5122181a2
