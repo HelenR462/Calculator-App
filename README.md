@@ -11,7 +11,7 @@ Try it [here](https://HelenR462.github.io/Calculator-App/)
 
 <br>
 
-<img src="image/screenshot.png">
+<img src="image/Calc_App_Screenshot.png">
 
 ## Summary
 
@@ -21,3 +21,8 @@ The best part about building this app, that took me about 1 1/2 weeks, is that i
 
 I'm really happy with how this turned out from both a visual user design to the functionality working well.
 
+
+## Author
+
+-   **Helen M Naizghi-Redae**  - _Full-Stack Software Developer_ - [Website](https://helenmnaizghi-redae.com
+(https://www.linkedin.com/in/helenr)
