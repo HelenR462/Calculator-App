@@ -3,7 +3,7 @@
 
 <br>
 
-_This is a simple calculator with a running total and memory options_
+_This is a simple calculator _
 
 <br>
 
@@ -24,4 +24,4 @@ I'm really happy with how this turned out from both a visual user design to the 
 
 ## Author
 
--   **Helen M Naizghi-Redae** - _Full-Stack Software Developer_ - [Website](https://helenmnaizghi-redae.com) | [LinkedIn](https://www.linkedin.com/in/helen-r-5122181a2)
+-   **Helen M. Naizghi-Redae** - _Full-Stack Software Developer_ - [Website](https://helenmnaizghi-redae.com) | [LinkedIn](https://www.linkedin.com/in/helen-r-5122181a2)
