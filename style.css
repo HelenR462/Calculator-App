@@ -75,7 +75,7 @@ button#clear:hover{
 
 }
 
-.number,#decimal,.equality,.operator{
+.calcButton{
    display:inline-block ;
    font-size: 40px;
    width:50px ;
@@ -92,7 +92,7 @@ button#clear:hover{
 }
 
 
-.number:hover,#decimal:hover,#compute:hover,.operator:hover{
+.calcButton:hover{
     background-color:gray;
     color: white;
    
